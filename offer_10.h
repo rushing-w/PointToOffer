@@ -17,7 +17,22 @@ int NumOf1(int n)
 }
 //但是上面的代码有一个很大的问题，那就是不能处理负数，否则会陷入死循环
 
-//优化
+int NUmOf1_G(int n)
+{
+	int count = 0;
+	int flag = 1;
+	while (flag != 0) 
+	{
+		if ((n & flag) != 0)//1的二进制中只有最后一位为1，依次左移就相当于将1从左往右一步步移动，
+		{					//然后相与得到这一位是不是为1
+			count++;
+		}
+		flag = flag << 1;
+	}
+	return count;
+}
+
+//最优解
 int NumOf1_Y(int n)
 {
 	int count = 0;
