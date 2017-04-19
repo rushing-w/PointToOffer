@@ -33,12 +33,13 @@ public:
 		}
 
 		if (s2.size() == 0)
-			cout << "queue is empty" << endl;
+			throw invalid_argument("queue is empty");
 
 		T head = s2.top();
 		s2.pop();
 		return head;
 	}
+
 
 private:
 	stack<T> s1;
