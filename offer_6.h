@@ -3,6 +3,7 @@
 #include<iostream>
 using namespace std;
 #include<vector>
+#include<assert.h>
 
 //ÖØ½¨¶þ²æÊ÷
 //Definition for binary tree
@@ -47,6 +48,34 @@ Node* ReConstructTree(int* Prev, int* In, int len)
 		root->right = ReConstructTree(&Prev[len_L + 1], &In[len_L + 1], len_R);
 	}
 
+	return root;
+}
+
+Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InEnd)
+{
+	assert(PrevOrder && InOrder);
+
+	Node* root = NULL;
+	if (InBegin < InEnd)
+	{
+		root = new Node(PrevOrder[PrevIndex]);
+		if (InBegin == InEnd)
+			return root;
+
+		int i = InBegin;
+		for (; i <= InEnd; ++i)
+		{
+			if (PrevOrder[PrevIndex] == InOrder[i])
+				break;
+		}
+
+		if (i > InEnd)
+			throw invalid_argument("Ê÷±éÀúË³Ðò²»Æ¥Åä");
+
+		root->left = ReBulid(PrevOrder, ++PrevIndex, InOrder, InBegin, i - 1);
+
+		root->right = ReBulid(PrevOrder, ++PrevIndex, InOrder, i + 1, InEnd);
+	}
 	return root;
 }
 
