@@ -3,7 +3,10 @@
 #include<iostream>
 using namespace std;
 #include<vector>
+<<<<<<< HEAD
 #include<assert.h>
+=======
+>>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
 
 //重建二叉树
 //Definition for binary tree
@@ -51,6 +54,7 @@ Node* ReConstructTree(int* Prev, int* In, int len)
 	return root;
 }
 
+<<<<<<< HEAD
 Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InEnd)
 {
 	assert(PrevOrder && InOrder);
@@ -80,6 +84,9 @@ Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InE
 }
 
 class solution {
+=======
+class Solution {
+>>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
 public:
 	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin) 
 	{
@@ -88,7 +95,11 @@ public:
 
 		int rootval = pre[0];
 		Node* root = new Node(rootval);
+<<<<<<< HEAD
 		size_t i = 0;
+=======
+		int i = 0;
+>>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
 		for (; i < pre.size() && vin[i] != rootval; ++i)//借此得到左子树和右子树的节点个数
 		{
 			;
