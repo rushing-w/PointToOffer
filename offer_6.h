@@ -54,7 +54,7 @@ Node* ReConstructTree(int* Prev, int* In, int len)
 	return root;
 }
 
-<<<<<<< HEAD
+
 Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InEnd)
 {
 	assert(PrevOrder && InOrder);
@@ -75,18 +75,23 @@ Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InE
 
 		if (i > InEnd)
 			throw invalid_argument("树遍历顺序不匹配");
+		if (i - 1 > 0)
+		{
+			root->left = ReBulid(PrevOrder, ++PrevIndex, InOrder, InBegin, i - 1);
+		}
 
-		root->left = ReBulid(PrevOrder, ++PrevIndex, InOrder, InBegin, i - 1);
-
-		root->right = ReBulid(PrevOrder, ++PrevIndex, InOrder, i + 1, InEnd);
+		if (i + 1 <= InEnd)
+		{
+			root->right = ReBulid(PrevOrder, ++PrevIndex, InOrder, i + 1, InEnd);
+		}
 	}
 	return root;
 }
 
-class solution {
-=======
+
+
 class Solution {
->>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
+
 public:
 	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin) 
 	{
@@ -95,11 +100,11 @@ public:
 
 		int rootval = pre[0];
 		Node* root = new Node(rootval);
-<<<<<<< HEAD
+
 		size_t i = 0;
-=======
+
 		int i = 0;
->>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
+
 		for (; i < pre.size() && vin[i] != rootval; ++i)//借此得到左子树和右子树的节点个数
 		{
 			;
