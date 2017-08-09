@@ -3,10 +3,7 @@
 #include<iostream>
 using namespace std;
 #include<vector>
-<<<<<<< HEAD
 #include<assert.h>
-=======
->>>>>>> 2faa9c358324e2e3733bc4f03bb2d5cfe1c1819f
 
 //重建二叉树
 //Definition for binary tree
@@ -54,20 +51,47 @@ Node* ReConstructTree(int* Prev, int* In, int len)
 	return root;
 }
 
+Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InEnd, int len)
+{
+	assert(PrevOrder && InOrder);
+	
+	Node* root = NULL;
+	if (InBegin < InEnd && PrevIndex < len)
+	{
+		root = new Node(PrevOrder[PrevIndex]);
+		if (InBegin == InEnd)
+			return root;
+		int i = InBegin; 
+		for (; i < InEnd; ++i)
+		{
+			if (PrevOrder[PrevIndex] == InOrder[i])
+				break;
+		}
+
+		root->left = ReBulid(PrevOrder, ++PrevIndex, InOrder, InBegin, i - 1, len);
+
+		root->right = ReBulid(PrevOrder, ++PrevIndex, InOrder, i + 1, InEnd, len);
+	}
+	else
+	{
+		PrevIndex--;
+	}
+	return root;
+}
 
 Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InEnd)
 {
 	assert(PrevOrder && InOrder);
 
 	Node* root = NULL;
-	if (InBegin < InEnd)
+	if (InBegin <= InEnd)
 	{
 		root = new Node(PrevOrder[PrevIndex]);
 		if (InBegin == InEnd)
 			return root;
 
 		int i = InBegin;
-		for (; i <= InEnd; ++i)
+		for (; i < InEnd; ++i)
 		{
 			if (PrevOrder[PrevIndex] == InOrder[i])
 				break;
@@ -87,11 +111,7 @@ Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InE
 	}
 	return root;
 }
-
-
-
-class Solution {
-
+class solution {
 public:
 	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin) 
 	{
@@ -100,11 +120,7 @@ public:
 
 		int rootval = pre[0];
 		Node* root = new Node(rootval);
-
 		size_t i = 0;
-
-		int i = 0;
-
 		for (; i < pre.size() && vin[i] != rootval; ++i)//借此得到左子树和右子树的节点个数
 		{
 			;
@@ -135,5 +151,7 @@ void TestReConstructTree()
 {
 	int Prev[] = { 1, 2, 4, 7, 3, 5, 6, 8 };
 	int In[] = { 4, 7, 2, 1, 5, 3, 8, 6 };
-	Node* root = ReConstructTree(Prev, In, 8);
+	int i = 0;
+	//Node* root = ReConstructTree(Prev, In, 8);
+	Node* root = ReBulid(Prev, i, In, 0, 7);
 }
