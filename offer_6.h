@@ -59,8 +59,7 @@ Node* ReBulid(int* PrevOrder, int& PrevIndex, int* InOrder, int InBegin, int InE
 	if (InBegin < InEnd && PrevIndex < len)
 	{
 		root = new Node(PrevOrder[PrevIndex]);
-		if (InBegin == InEnd)
-			return root;
+		
 		int i = InBegin; 
 		for (; i < InEnd; ++i)
 		{
